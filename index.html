@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Integral of powers of cos & sin</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h1>Integral of powers of cos & sin</h1>
+    <label>
+        <select name="sinorcos" id="sinorcos" onchange="sinorcos()">
+            <option>sin</option>
+            <option>cos</option>
+        </select>
+    </label>
+    </br>
+    </br>
+    <div>
+        <p class="choise" id="function">sin</p><input type="text" class="choise" id="pow"><p class="choise">(x)</p>
+    </div>
+    </br>
+    <button onclick="run()">Integrate!</button>
+    </br>
+    </br>
+    </br>
+    <div id="output">
+
+    </div>
+</body>
+</html>

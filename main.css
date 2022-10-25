@@ -1,0 +1,9 @@
+.choise{
+    float: left;
+}
+input{
+    width: 15px;
+}
+button{
+    margin-left: 20px;
+}
