@@ -47,34 +47,27 @@ function no_1(a){
     }
 }
 
-function i_cos(a, n, d){
-    if(a % 2){
+function i_cos(a, n, d, m){
+    if(a == 0){
+        let p = m;
+        let q = d;
+        let g = gcd(p, q);
+        if(Math.abs(p) == q){
+            if(p > 0){
+                return "x";
+            }else{
+                return "-x"
+            }
+        }else if(q/g == 1){
+            return p / g + " x";
+        }else{
+            return p / g+ "/" + q / g + " x";
+        }
+    }else if(a % 2){
         let b = (a - 1) / 2;
         let res = "";
-        for (let i = 0; i < b; i++) {
-            let p = Math.pow(-1, b - i) * factorial(b) / factorial(i) / factorial(b - i);
-            let q = (2 * (b - i) + 1) * d * n;
-            let g = gcd(p, q);
-            if(Math.abs(p) == q){
-                if(p > 0){
-                    res += "sin" + to_superscript(2 * (b - i) + 1) + "(" + no_1(n) + "x) + ";
-                }else{
-                    res += "-sin" + to_superscript(2 * (b - i) + 1) + "(" + no_1(n) + "x) + ";
-                }
-            }else if(q/g == 1){
-                res += p / g + " sin" + to_superscript(p) + "(" + no_1(n) + "x) + ";
-            }else{
-                res += p / g+ "/" + q / g + " sin" + to_superscript(p) + "(" + no_1(n) + "x) + ";
-            }
-        }
-        res += "sin(" + no_1(n) + "x)";
-        return res;
-    }else{
-        return "In development"
-        let div = Math.pow(2, a/2);
-        let res = "";
-        for (let i = 0; i < b; i++) {
-            let p = Math.pow(-1, b - i) * factorial(b) / factorial(i) / factorial(b - i);
+        for (let i = 0; i <= b; i++) {
+            let p = Math.pow(-1, b - i) * factorial(b) / factorial(i) / factorial(b - i) * m;
             let q = (2 * (b - i) + 1) * d * n;
             let g = gcd(p, q);
             if(Math.abs(p) == q){
@@ -89,15 +82,44 @@ function i_cos(a, n, d){
                 res += p / g+ "/" + q / g + " sin" + to_superscript(2 * (b - i) + 1) + "(" + no_1(n) + "x) + ";
             }
         }
+        //res += "sin(" + no_1(n) + "x)";
+        return res.substring(0, res.length - 3);
+    }else{
+        let div = Math.pow(2, a/2) * d;
+        let b = a / 2;
+        let res = "";
+        for (let i = 0; i <= b; i++) {
+            let p = /*Math.pow(-1, b - i) * */factorial(b) / factorial(i) / factorial(b - i) * m;
+            let q = i;
+            // let g = gcd(p, q);
+            res += i_cos(q, 2 * n, div, p) + " + ";
+            
+        }
+        return res.substring(0, res.length - 3);
     }
 }
 
-function i_sin(a, n, d){
-    if(a % 2){
+function i_sin(a, n, d, m){
+    if(a == 0){
+        let p = m;
+        let q = d;
+        let g = gcd(p, q);
+        if(Math.abs(p) == q){
+            if(p > 0){
+                return "x";
+            }else{
+                return "-x"
+            }
+        }else if(q/g == 1){
+            return p / g + " x";
+        }else{
+            return p / g+ "/" + q / g + " x";
+        }
+    }else if(a % 2){
         let b = (a - 1) / 2;
         let res = "";
-        for (let i = 0; i < b; i++) {
-            let p = Math.pow(-1, b - i + 1) * factorial(b) / factorial(i) / factorial(b - i);
+        for (let i = 0; i <= b; i++) {
+            let p = Math.pow(-1, b - i + 1) * factorial(b) / factorial(i) / factorial(b - i) * m;
             let q = (2 * (b - i) + 1) * d * n;
             let g = gcd(p, q);
             if(Math.abs(p) == q){
@@ -112,18 +134,28 @@ function i_sin(a, n, d){
                 res += p / g+ "/" + q / g + " cos" + to_superscript(2 * (b - i) + 1) + "(" + no_1(n) + "x) + ";
             }
         }
-        res += "-cos(" + no_1(n) + "x)";
-        return res;
+        //res += "sin(" + no_1(n) + "x)";
+        return res.substring(0, res.length - 3);
     }else{
-        return "In development"
+        let div = Math.pow(2, a/2) * d;
+        let b = a / 2;
+        let res = "";
+        for (let i = 0; i <= b; i++) {
+            let p = Math.pow(-1, i) * factorial(b) / factorial(i) / factorial(b - i) * m;
+            let q = i;
+            // let g = gcd(p, q);
+            res += i_cos(q, 2 * n, div, p) + " + ";
+            
+        }
+        return res.substring(0, res.length - 3);
     }
 }
 
 function run(){
     let input_ = parseInt(document.getElementById("pow").value);
     if(sin_or_cos){
-        document.getElementById("output").innerHTML = "<p>" + i_cos(input_, 1, 1) + " + k</p>";
+        document.getElementById("output").innerHTML = "<p>" + i_cos(input_, 1, 1, 1) + " + k</p>";
     }else{
-        document.getElementById("output").innerHTML = "<p>" + i_sin(input_, 1, 1) + " + k</p>";
+        document.getElementById("output").innerHTML = "<p>" + i_sin(input_, 1, 1, 1) + " + k</p>";
     }
 }
